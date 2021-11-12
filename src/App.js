@@ -38,7 +38,7 @@ const App = () => {
 		<br></br>
 		<br></br>
 
-		<img className="image" src={qrCode}  />	
+		<img className="image" src={qrCode}  alt="QR Code"/>	
 	</div>
 }
 
