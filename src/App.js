@@ -1,25 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import QRCode from 'qrcode';
+import { useEffect, useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = () => {
+
+  const [temp, setTemp] = useState(''); 
+  const [word, setWord] = useState('http://www.connect-ai.solutions'); 
+  const [qrCode, setQrCode] = useState(''); 
+
+  useEffect( () => {
+		QRCode.toDataURL(word).then( (data) => {
+			setQrCode(data);
+		});	
+	}, [word] );
+
+   // Updating the input word when user
+  // click on the generate button
+  function handleClick() {
+    setWord(temp);
+  }
+  
+
+  return <div className="main"> QR Code - Connect AI Solutions 
+		<br></br>
+		<br></br>
+
+	        <div >
+          		<input type="text" onChange={
+            		(e) => {setTemp(e.target.value)}}
+            		placeholder="Enter text to encode" />
+          		<button  
+            		onClick={handleClick}>
+            		Generate
+          		</button>
+        	</div>
+		<br></br>
+		<br></br>
+
+		<img className="image" src={qrCode}  />	
+	</div>
 }
 
 export default App;
